@@ -353,49 +353,48 @@ NumPy参考文档
 基本可视化
 -------------------
 
-Now that we have our first data arrays, we are going to visualize them.
+现在我们学会了创建arrays,接下来我们要可视化它们。
 
-Start by launching IPython:
+从启动 IPython 开始:
 
 .. sourcecode:: bash
 
     $ ipython
 
-Or the notebook:
+或者用 notebook:
 
 .. sourcecode:: bash
 
    $ ipython notebook
 
-Once IPython has started, enable interactive plots:
+一旦 IPython 启动起来, 将会启用交互式绘图:
 
 .. sourcecode:: pycon
 
     >>> %matplotlib  # doctest: +SKIP
 
-Or, from the notebook, enable plots in the notebook:
+或者, 从 notebook 启动, 则同样可以把图直接划在 notebook 上:
 
 .. sourcecode:: pycon
 
     >>> %matplotlib inline # doctest: +SKIP
 
-The ``inline`` is important for the notebook, so that plots are displayed in
-the notebook and not in a new window.
+命令 ``inline`` 对 notebook 非常重要, 这个命令会把图显示在 notebook 上 而不是在一个新弹出的窗口上。
 
-*Matplotlib* is a 2D plotting package. We can import its functions as below:
+*Matplotlib* 是一个绘制 2D 图形的package。 我们可以像下面这样导入它的函数:
 
 .. sourcecode:: pycon
 
-    >>> import matplotlib.pyplot as plt  # the tidy way
+    >>> import matplotlib.pyplot as plt  # 依紧凑的方式导入
 
-And then use (note that you have to use ``show`` explicitly if you have not enabled interactive plots with ``%matplotlib``):
+然后使用 (请注意如果你没有通过 ``%matplotlib`` 命令启用交互式画图 ，你必须显式的的使用 ``show`` ):
 
 .. sourcecode:: pycon
 
     >>> plt.plot(x, y)       # line plot    # doctest: +SKIP
-    >>> plt.show()           # <-- shows the plot (not needed with interactive plots) # doctest: +SKIP
+    >>> plt.show()           # <-- 显示图 (如果使用交互式画图，则不需要这个) # doctest: +SKIP
 
-Or, if you have enabled interactive plots with ``%matplotlib``:
+或者, 如果你通过 ``%matplotlib`` 启用了交互式画图 :
 
 .. sourcecode:: pycon
 
@@ -417,7 +416,7 @@ Or, if you have enabled interactive plots with ``%matplotlib``:
     :target: auto_examples/plot_basic1dplot.html
     :align: center
 
-* **2D arrays** (such as images):
+* **2D arrays** (比如 图像):
 
 .. sourcecode:: pycon
 
@@ -432,14 +431,13 @@ Or, if you have enabled interactive plots with ``%matplotlib``:
     :target: auto_examples/plot_basic2dplot.html
     :align: center
 
-.. seealso:: More in the: :ref:`matplotlib chapter <matplotlib>`
+.. seealso:: 更多例子: :ref:`matplotlib chapter <matplotlib>`
 
-.. topic:: **Exercise: Simple visualizations**
+.. topic:: **练习: 简单可视化**
    :class: green
 
-   * Plot some simple arrays: a cosine as a function of time and a 2D
-     matrix.
-   * Try using the ``gray`` colormap on the 2D matrix.
+   * 绘制一些简单的数组: 一个与时间相关的余弦函数，以及 一个 2D 矩阵。
+   * 尝试在2D矩阵上使用 ``gray`` colormap 
 
 .. * **3D plotting**:
 ..
@@ -474,8 +472,7 @@ Or, if you have enabled interactive plots with ``%matplotlib``:
 索引 与 切片
 --------------------
 
-The items of an array can be accessed and assigned to the same way as
-other Python sequences (e.g. lists):
+Numpy数组的元素可以访问和赋值，就像Python的序列容器一样(e.g. lists):
 
 .. sourcecode:: pycon
 
@@ -487,17 +484,17 @@ other Python sequences (e.g. lists):
 
 .. warning::
 
-   Indices begin at 0, like other Python sequences (and C/C++).
-   In contrast, in Fortran or Matlab, indices begin at 1.
+   索引从 0 开始, 就像 Python 的其他序列一样 (and C/C++).
+   与此相反, 在 Fortran 或 Matlab, 索引从 1 开始。
 
-The usual python idiom for reversing a sequence is supported:
+python 的序列反转操作在Numpy中也是被支持的:
 
 .. sourcecode:: pycon
 
    >>> a[::-1]
    array([9, 8, 7, 6, 5, 4, 3, 2, 1, 0])
 
-For multidimensional arrays, indexes are tuples of integers:
+对于多维数组, 索引是整数构成的元组:
 
 .. sourcecode:: pycon
 
@@ -519,12 +516,10 @@ For multidimensional arrays, indexes are tuples of integers:
 
 .. note::
 
-  * In 2D, the first dimension corresponds to **rows**, the second 
-    to **columns**.
-  * for multidimensional ``a``, ``a[0]`` is interpreted by
-    taking all elements in the unspecified dimensions.
+  * 在 2D 数组中, 第一个维度对应于 **rows**, 第二个维度对应于 **columns**.
+  * 对于多维数组 ``a``, ``a[0]`` 被解释为 把剩下的所有未指定的纬度上的元素全取出来.
 
-**Slicing**: Arrays, like other Python sequences can also be sliced:
+**Slicing**: Arrays,像其他的Python序列一样可以被切片:
 
 .. sourcecode:: pycon
 
@@ -534,15 +529,14 @@ For multidimensional arrays, indexes are tuples of integers:
     >>> a[2:9:3] # [start:end:step]
     array([2, 5, 8])
 
-Note that the last index is not included! :
+注意最后一个索引是不包括的! :
 
 .. sourcecode:: pycon
 
     >>> a[:4]
     array([0, 1, 2, 3])
 
-All three slice components are not required: by default, `start` is 0,
-`end` is the last and `step` is 1:
+切片中的三个参数不是都必须要同时具备的: 默认的, `start` 是 0, `end` 是最后一个，且 `step` is 1:
 
 .. sourcecode:: pycon
 
@@ -553,7 +547,7 @@ All three slice components are not required: by default, `start` is 0,
     >>> a[3:]
     array([3, 4, 5, 6, 7, 8, 9])
 
-A small illustrated summary of NumPy indexing and slicing...
+下面是Numpy数组的索引和切片的一个小小的总结...
 
 .. only:: latex
 
@@ -566,7 +560,7 @@ A small illustrated summary of NumPy indexing and slicing...
         :align: center
         :width: 70%
 
-You can also combine assignment and slicing:
+你还可以将赋值与切片结合起来:
 
 .. sourcecode:: pycon
 
@@ -579,14 +573,12 @@ You can also combine assignment and slicing:
    >>> a
    array([0, 1, 2, 3, 4, 4, 3, 2, 1, 0])
 
-.. topic:: **Exercise: Indexing and slicing**
+.. topic:: **练习: 索引与切片**
    :class: green
 
-   * Try the different flavours of slicing, using ``start``, ``end`` and
-     ``step``: starting from a linspace, try to obtain odd numbers
+   * 尝试不同形式的切片操作, 使用 ``start``, ``end`` 和 ``step``: 从 linspace 开始, try to obtain odd numbers
      counting backwards, and even numbers counting forwards.
-   * Reproduce the slices in the diagram above. You may
-     use the following expression to create the array:
+   * 重新产生上表中的切片. 你可以使用一下表达式创建一个数组:
 
      .. sourcecode:: pycon
 
@@ -598,10 +590,10 @@ You can also combine assignment and slicing:
                [40, 41, 42, 43, 44, 45],
                [50, 51, 52, 53, 54, 55]])
 
-.. topic:: **Exercise: Array creation**
+.. topic:: **练习: Array 创建**
     :class: green
 
-    Create the following arrays (with correct data types)::
+    创建下面的数组 (请注意数据类型要正确)::
 
         [[1, 1, 1, 1],
          [1, 1, 1, 1],
@@ -617,16 +609,14 @@ You can also combine assignment and slicing:
 
     Par on course: 3 statements for each
 
-    *Hint*: Individual array elements can be accessed similarly to a list,
-    e.g. ``a[1]`` or ``a[1, 2]``.
+    *提示*: 单个的numpy数组元素可以被访问，类似于python的list, e.g. ``a[1]`` or ``a[1, 2]``。
 
-    *Hint*: Examine the docstring for ``diag``.
+    *提示*: 请查看 ``diag`` 函数的文档字符串。
 
-.. topic:: Exercise: Tiling for array creation
+.. topic:: 练习: 用于数组创建的平铺(Tiling)
     :class: green
 
-    Skim through the documentation for ``np.tile``, and use this function
-    to construct the array::
+    查看文档中的这个函数 ``np.tile``, 用它创建下面的这个数组::
 
         [[4, 3, 4, 3, 4, 3],
          [2, 1, 2, 1, 2, 1],
@@ -636,13 +626,11 @@ You can also combine assignment and slicing:
 拷贝 和 视图
 ----------------
 
-A slicing operation creates a **view** on the original array, which is
-just a way of accessing array data. Thus the original array is not
-copied in memory. You can use ``np.may_share_memory()`` to check if two arrays
-share the same memory block. Note however, that this uses heuristics and may
-give you false positives.
+一个切片操作在原数组上创建一个 **视图(view)** , 它只是访问数组数据的一种方法。因此，原数组并没有发生内存拷贝。
+你可以使用 ``np.may_share_memory()`` 来检查两个数组是否共享了内存锁。然而，要注意这个方法的检查是启发式的，
+可能会给你假正的结果(false positives)。
 
-**When modifying the view, the original array is modified as well**:
+**当修改视图的时候, 原数组也会被修改**:
 
 .. sourcecode:: pycon
 
@@ -671,8 +659,7 @@ give you false positives.
 
 
 
-This behavior can be surprising at first sight... but it allows to save both
-memory and time.
+这种行为乍一看可能是令人惊讶的，…。但它可以节省内存和时间。
 
 
 .. EXE: [1, 2, 3, 4, 5] -> [1, 2, 3]
@@ -686,27 +673,26 @@ memory and time.
 .. EXE: create an array [1, 0, 2, 0, 3, 0, 4]
 .. CHA: archimedean sieve
 
-.. topic:: Worked example: Prime number sieve
+.. topic:: 案例: 素数筛选
    :class: green
 
    .. image:: images/prime-sieve.png
 
-   Compute prime numbers in 0--99, with a sieve
+   计算 0--99 内的素数, 使用筛子(sieve)
 
-   * Construct a shape (100,) boolean array ``is_prime``,
-     filled with True in the beginning:
+   * 创建一个 shape 为 (100,) 的 boolean 数组 ``is_prime``, 刚开始的时候全部填充为 True:
 
    .. sourcecode:: pycon
 
         >>> is_prime = np.ones((100,), dtype=bool)
 
-   * Cross out 0 and 1 which are not primes:
+   * 划出不属于素数的0和1:
 
    .. sourcecode:: pycon
 
        >>> is_prime[:2] = 0
 
-   * For each integer ``j`` starting from 2, cross out its higher multiples:
+   * 对每一个从 2 开始的整数 ``j`` , cross out its higher multiples:
 
    .. sourcecode:: pycon
 
@@ -714,31 +700,31 @@ memory and time.
        >>> for j in range(2, N_max + 1):
        ...     is_prime[2*j::j] = False
 
-   * Skim through ``help(np.nonzero)``, and print the prime numbers
+   * 查看帮助文档 ``help(np.nonzero)``, 然后输出素数
 
    * Follow-up:
 
-     - Move the above code into a script file named ``prime_sieve.py``
+     - 将上面的代码移动到 ``prime_sieve.py``
 
-     - Run it to check it works
+     - 运行一下看是否正确
 
-     - Use the optimization suggested in `the sieve of Eratosthenes
+     - 使用下面推荐的方式优化 `the sieve of Eratosthenes
        <https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes>`_:
 
       1. Skip ``j`` which are already known to not be primes
 
       2. The first number to cross out is :math:`j^2`
 
-高级索引技巧
---------------
+花式索引(fancy indexing)
+----------------------------
 
 .. tip::
 
-    NumPy arrays can be indexed with slices, but also with boolean or
-    integer arrays (**masks**). This method is called *fancy indexing*.
-    It creates **copies not views**.
+    NumPy数组可以用切片索引，也可以用布尔数组或整数数组(**掩码**)索引。
+    这种方法称为花式索引(*fancy indexing*)。
+    它创建副本而不是视图。
 
-Using boolean masks
+使用boolen型索引
 ...................
 
 .. sourcecode:: pycon
@@ -752,10 +738,10 @@ Using boolean masks
             True,  True, False,  True, False, False], dtype=bool)
     >>> mask = (a % 3 == 0)
     >>> extract_from_a = a[mask] # or,  a[a%3==0]
-    >>> extract_from_a           # extract a sub-array with the mask
+    >>> extract_from_a           # 使用mask抽取一个子数组(sub-array)
     array([ 3,  0,  9,  6,  0, 12])
 
-Indexing with a mask can be very useful to assign a new value to a sub-array:
+使用掩码索引对于为子数组分配新值非常有用:
 
 .. sourcecode:: pycon
 
@@ -764,7 +750,7 @@ Indexing with a mask can be very useful to assign a new value to a sub-array:
     array([10, -1,  8, -1, 19, 10, 11, -1, 10, -1, -1, 20, -1,  7, 14])
 
 
-Indexing with an array of integers
+使用整型数组进行索引
 ..................................
 
 .. sourcecode:: pycon
@@ -773,15 +759,14 @@ Indexing with an array of integers
     >>> a
     array([ 0, 10, 20, 30, 40, 50, 60, 70, 80, 90])
 
-Indexing can be done with an array of integers, where the same index is repeated
-several time:
+索引可以用一个整数数组来完成，其中相同的索引可以重复几次:
 
 .. sourcecode:: pycon
 
-    >>> a[[2, 3, 2, 4, 2]]  # note: [2, 3, 2, 4, 2] is a Python list
+    >>> a[[2, 3, 2, 4, 2]]  # 注意: [2, 3, 2, 4, 2] 是一个 Python list
     array([20, 30, 20, 40, 20])
 
-New values can be assigned with this kind of indexing:
+新的值可以用这种索引来赋值:
 
 .. sourcecode:: pycon
 
@@ -791,8 +776,7 @@ New values can be assigned with this kind of indexing:
 
 .. tip::
 
-  When a new array is created by indexing with an array of integers, the
-  new array has the same shape as the array of integers:
+  当通过用整数数组索引新数组创建新数组时，新数组具有与整数数组相同的形状:
 
   .. sourcecode:: pycon
 
@@ -807,7 +791,7 @@ New values can be assigned with this kind of indexing:
 
 ____
 
-The image below illustrates various fancy indexing applications
+下图演示了各种高级索引应用
 
 .. only:: latex
 
@@ -820,13 +804,12 @@ The image below illustrates various fancy indexing applications
         :align: center
         :width: 80%
 
-.. topic:: **Exercise: Fancy indexing**
+.. topic:: **练习: 花式索引**
     :class: green
 
-    * Again, reproduce the fancy indexing shown in the diagram above.
-    * Use fancy indexing on the left and array creation on the right to assign
-      values into an array, for instance by setting parts of the array in
-      the diagram above to zero.
+    * 同样，把上面的图表中所示的花哨索引重做一遍。
+    * 使用左边的花式索引和右边的数组创建来将值赋值到数组中，例如，将上面图表中的数组的部分设置为零。
+
 
 .. We can even use fancy indexing and :ref:`broadcasting <broadcasting>` at
 .. the same time:
