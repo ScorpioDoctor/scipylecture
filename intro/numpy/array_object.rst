@@ -10,7 +10,7 @@
 NumPy 数组对象
 ======================
 
-.. contents:: Section contents
+.. contents:: 本节内容
     :local:
     :depth: 1
 
@@ -22,20 +22,19 @@ NumPy数组(arrays)
 
 :**Python** objects:
 
-    - high-level number objects: integers, floating point
+    - 高级数字对象: 整型数(integers), 浮点数(floats), ....
 
-    - containers: lists (costless insertion and append), dictionaries
-      (fast lookup)
+    - 容器: lists (插入和追加元素是无代价的), dictionaries(快速查找)
 
 :**NumPy** provides:
 
-    - extension package to Python for multi-dimensional arrays
+    - 给Python提供了一个多维数组的扩展包
 
-    - closer to hardware (efficiency)
+    - 更加的接近硬件(cpu,内存等) (高效)
 
-    - designed for scientific computation (convenience)
+    - 为科学计算而设计 (方便)
 
-    - Also known as *array oriented computing*
+    - 被称为 面向数组的计算(*array oriented computing*),与Matlab类似
 
 |
 
@@ -48,20 +47,19 @@ NumPy数组(arrays)
 
 .. tip::
 
-    For example, An array containing:
+    比如, 一个数组(array)包含:
 
-    * values of an experiment/simulation at discrete time steps
+    * 在离散时间步获得的实验/仿真数据
 
-    * signal recorded by a measurement device, e.g. sound wave
+    * 由测量设备记录的信号, e.g. 声波
 
-    * pixels of an image, grey-level or colour
+    * 一张图像的像素, 灰度或彩色
 
-    * 3-D data measured at different X-Y-Z positions, e.g. MRI scan
+    * 在不同的 X-Y-Z 位置上测量到的位置数据, e.g. 核磁共振扫描数据
 
     * ...
 
-**Why it is useful:** Memory-efficient container that provides fast numerical
-operations.
+**为啥它这么有用:** 内存高效的容器，提供了快速的数值运算。
 
 .. sourcecode:: ipython
 
@@ -91,9 +89,9 @@ operations.
 NumPy参考文档
 ..............................
 
-- On the web: http://docs.scipy.org/
+- 在线文档网址: http://docs.scipy.org/
 
-- Interactive help:
+- 交互式帮助:
 
   .. sourcecode:: ipython
 
@@ -113,7 +111,7 @@ NumPy参考文档
          array(object, dtype=None, ...
 
 
-- Looking for something:
+- 用 `lookfor` 查找:
 
   .. sourcecode:: pycon
 
@@ -136,7 +134,7 @@ NumPy参考文档
 导入约定
 ..................
 
-The recommended convention to import numpy is:
+导入numpy的方式的约定:
 
 .. sourcecode:: pycon
 
@@ -175,7 +173,7 @@ The recommended convention to import numpy is:
     2
     >>> b.shape
     (2, 3)
-    >>> len(b)     # returns the size of the first dimension
+    >>> len(b)     # 返回的是第一个纬度的size
     2
 
     >>> c = np.array([[[1], [2]], [[3], [4]]])
@@ -188,24 +186,20 @@ The recommended convention to import numpy is:
     >>> c.shape
     (2, 2, 1)
 
-.. topic:: **Exercise: Simple arrays**
+.. topic:: **练习: 简单数组**
     :class: green
 
-    * Create a simple two dimensional array. First, redo the examples
-      from above. And then create your own: how about odd numbers
-      counting backwards on the first row, and even numbers on the second?
-    * Use the functions :func:`len`, :func:`numpy.shape` on these arrays.
-      How do they relate to each other? And to the ``ndim`` attribute of
-      the arrays?
+    * 创建一个简单的二维数组。首先，重做上面的示例。然后创建你自己的：第一行的奇数倒计时，第二行的偶数如何？
+    * 在这些数组上使用函数 :func:`len`, :func:`numpy.shape` 。他们返回的结果相互之间有什么内在联系呐？
 
 可用于创建数组的函数
 ..............................
 
 .. tip::
 
-    In practice, we rarely enter items one by one...
+    在实践中，我们几乎不会一个一个的输入数组的每一项元素来创建数组 ...
 
-* Evenly spaced:
+* 创建均匀间隔的数组:
 
   .. sourcecode:: pycon
 
@@ -216,22 +210,22 @@ The recommended convention to import numpy is:
     >>> b
     array([1, 3, 5, 7])
 
-* or by number of points:
+* 或 按点数创建数组:
 
   .. sourcecode:: pycon
 
-    >>> c = np.linspace(0, 1, 6)   # start, end, num-points
+    >>> c = np.linspace(0, 1, 6)   #参数： start, end, num-points
     >>> c
     array([ 0. ,  0.2,  0.4,  0.6,  0.8,  1. ])
-    >>> d = np.linspace(0, 1, 5, endpoint=False)
+    >>> d = np.linspace(0, 1, 5, endpoint=False)  #不包括end位置上的数字
     >>> d
     array([ 0. ,  0.2,  0.4,  0.6,  0.8])
 
-* Common arrays:
+* 创建常见数组:
 
   .. sourcecode:: pycon
 
-    >>> a = np.ones((3, 3))  # reminder: (3, 3) is a tuple
+    >>> a = np.ones((3, 3))  # 必须记住: 传入的 (3, 3) 是一个元组(tuple)
     >>> a
     array([[ 1.,  1.,  1.],
            [ 1.,  1.,  1.],
@@ -252,29 +246,27 @@ The recommended convention to import numpy is:
            [0, 0, 3, 0],
            [0, 0, 0, 4]])
 
-* :mod:`np.random`: random numbers (Mersenne Twister PRNG):
+* :mod:`np.random`: 创建随机数组 (Mersenne Twister PRNG):
 
   .. sourcecode:: pycon
 
-    >>> a = np.random.rand(4)       # uniform in [0, 1]
+    >>> a = np.random.rand(4)       # 在 [0, 1] 区间均匀分布
     >>> a  # doctest: +SKIP
     array([ 0.95799151,  0.14222247,  0.08777354,  0.51887998])
 
-    >>> b = np.random.randn(4)      # Gaussian
+    >>> b = np.random.randn(4)      # 高斯分布(正态分布：normal distribution)
     >>> b  # doctest: +SKIP
     array([ 0.37544699, -0.11425369, -0.47616538,  1.79664113])
 
-    >>> np.random.seed(1234)        # Setting the random seed
+    >>> np.random.seed(1234)        # 设置随机数种子
 
-.. topic:: **Exercise: Creating arrays using functions**
+.. topic:: **练习: 使用函数创建数组**
    :class: green
 
-   * Experiment with ``arange``, ``linspace``, ``ones``, ``zeros``, ``eye`` and
-     ``diag``.
-   * Create different kinds of arrays with random numbers.
-   * Try setting the seed before creating an array with random values.
-   * Look at the function ``np.empty``. What does it do? When might this be
-     useful?
+   * 练习它们吧！： ``arange``, ``linspace``, ``ones``, ``zeros``, ``eye`` 和 ``diag`` 。
+   * 用随机数创建不同的数组.
+   * 在创建随机数组之前尝试设置随机数种子.
+   * 看看函数 ``np.empty`` 。 它干了什么？什么时候会派上用场？
 
 .. EXE: construct 1 2 3 4 5
 .. EXE: construct -5, -4, -3, -2, -1
@@ -285,9 +277,8 @@ The recommended convention to import numpy is:
 基本数据类型
 ----------------
 
-You may have noticed that, in some instances, array elements are displayed with
-a trailing dot (e.g. ``2.`` vs ``2``). This is due to a difference in the
-data-type used:
+你可能注意到啦, 在一些例子中, 输出的数组元素后面会尾随着一个小点 (e.g. ``2.`` vs ``2``)。 
+这是由于数据类型不一样导致的:
 
 .. sourcecode:: pycon
 
@@ -301,14 +292,12 @@ data-type used:
 
 .. tip::
 
-    Different data-types allow us to store data more compactly in memory,
-    but most of the time we simply work with floating point numbers.
-    Note that, in the example above, NumPy auto-detects the data-type
-    from the input.
+    不同的数据类型允许我们在内存中存储更紧凑的数据，但大多数时候我们只是使用浮点数。
+    注意，在上面的例子中，NumPy自动从输入中检测数据类型。
 
 -----------------------------
 
-You can explicitly specify which data-type you want:
+你可以显式的指定你想要的数据类型(data-type):
 
 .. sourcecode:: pycon
 
@@ -317,7 +306,7 @@ You can explicitly specify which data-type you want:
     dtype('float64')
 
 
-The **default** data type is floating point:
+**默认** 数据类型是浮点数(floating point):
 
 .. sourcecode:: pycon
 
@@ -325,7 +314,7 @@ The **default** data type is floating point:
     >>> a.dtype
     dtype('float64')
 
-There are also other types:
+除了整型和浮点型，还有其他类型的:
 
 :Complex:
 
