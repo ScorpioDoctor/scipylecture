@@ -466,10 +466,9 @@ Numpy的这些算术运算当然比用纯Python的相关操作快的多啦:
 * 这同样适用于相同大小(same size)的数组。
 
     | **尽管如此**, 不同大小的数组也可以进行上述按元素操作。
-    | 如果 *NumPy* 可以can transform these arrays so that they all have
-    | the same size: this conversion is called **broadcasting**.
+    | 如果 *NumPy* 可以变换这些数组让他们具有相同的size: 这种变换称之为 **广播(broadcasting)**.
 
-The image below gives an example of broadcasting:
+下面的图片给出了广播的一些例子:
 
 .. only:: latex
 
@@ -482,7 +481,7 @@ The image below gives an example of broadcasting:
         :align: center
         :width: 100%
 
-Let's verify:
+让我们检查一下是不是这样的:
 
 .. sourcecode:: pycon
 
@@ -499,19 +498,19 @@ Let's verify:
            [20, 21, 22],
            [30, 31, 32]])
 
-We have already used broadcasting without knowing it!:
+我们已经在完全不知情的情况下使用了广播(broadcasting):
 
 .. sourcecode:: pycon
 
     >>> a = np.ones((4, 5))
-    >>> a[0] = 2  # we assign an array of dimension 0 to an array of dimension 1
+    >>> a[0] = 2  # 我们将维度0的数组分配给维度1的数组。 
     >>> a
     array([[ 2.,  2.,  2.,  2.,  2.],
            [ 1.,  1.,  1.,  1.,  1.],
            [ 1.,  1.,  1.,  1.,  1.],
            [ 1.,  1.,  1.,  1.,  1.]])
 
-An useful trick:
+一个有用的技巧:
 
 .. sourcecode:: pycon
 
