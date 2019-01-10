@@ -461,12 +461,12 @@ Numpy的这些算术运算当然比用纯Python的相关操作快的多啦:
 广播
 ------------
 
-* Basic operations on ``numpy`` arrays (addition, etc.) are elementwise
+* ``numpy`` 数组上的基本操作 (加法, etc.)是按元素的(elementwise)
 
-* This works on arrays of the same size.
+* 这同样适用于相同大小(same size)的数组。
 
-    | **Nevertheless**, It's also possible to do operations on arrays of different
-    | sizes if *NumPy* can transform these arrays so that they all have
+    | **尽管如此**, 不同大小的数组也可以进行上述按元素操作。
+    | 如果 *NumPy* 可以can transform these arrays so that they all have
     | the same size: this conversion is called **broadcasting**.
 
 The image below gives an example of broadcasting:
