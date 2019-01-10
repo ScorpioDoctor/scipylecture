@@ -23,7 +23,7 @@
 基本操作符
 ................
 
-With scalars:
+与标量运算:
 
 .. sourcecode:: pycon
 
@@ -33,7 +33,7 @@ With scalars:
     >>> 2**a
     array([ 2,  4,  8, 16])
 
-All arithmetic operates elementwise:
+所有算术运算都是按元素操作的:
 
 .. sourcecode:: pycon
 
@@ -47,7 +47,7 @@ All arithmetic operates elementwise:
     >>> 2**(j + 1) - j
     array([ 2,  3,  6, 13, 28])
 
-These operations are of course much faster than if you did them in pure python:
+Numpy的这些算术运算当然比用纯Python的相关操作快的多啦:
 
 .. sourcecode:: pycon
 
@@ -59,17 +59,17 @@ These operations are of course much faster than if you did them in pure python:
    1000 loops, best of 3: 861 us per loop
 
 
-.. warning:: **Array multiplication is not matrix multiplication:**
+.. warning:: **数组乘法(Array multiplication)不是矩阵乘法(matrix multiplication):**
 
     .. sourcecode:: pycon
 
         >>> c = np.ones((3, 3))
-        >>> c * c                   # NOT matrix multiplication!
+        >>> c * c                   # 不是 矩阵乘法
         array([[ 1.,  1.,  1.],
                [ 1.,  1.,  1.],
                [ 1.,  1.,  1.]])
 
-.. note:: **Matrix multiplication:**
+.. note:: **矩阵乘法:**
 
     .. sourcecode:: pycon
 
@@ -78,13 +78,12 @@ These operations are of course much faster than if you did them in pure python:
                [ 3.,  3.,  3.],
                [ 3.,  3.,  3.]])
 
-.. topic:: **Exercise: Elementwise operations**
+.. topic:: **练习: 按元素操作**
    :class: green
 
-    * Try simple arithmetic elementwise operations: add even elements
-      with odd elements
-    * Time them against their pure python counterparts using ``%timeit``.
-    * Generate:
+    * 尝试简单的算术按元素操作：用奇数元素加偶数元素
+    * 使用 ``%timeit`` 对比纯Python和Numpy的相关运算的效率.
+    * 生成:
 
       * ``[2**0, 2**1, 2**2, 2**3, 2**4]``
       * ``a_j = 2^(3*j) - j``
@@ -93,7 +92,7 @@ These operations are of course much faster than if you did them in pure python:
 其他操作符
 ................
 
-**Comparisons:**
+**比较运算:**
 
 .. sourcecode:: pycon
 
@@ -106,7 +105,7 @@ These operations are of course much faster than if you did them in pure python:
 
 .. tip::
 
-   Array-wise comparisons:
+   按数组比较(Array-wise comparisons):
 
    .. sourcecode:: pycon
 
@@ -119,7 +118,7 @@ These operations are of course much faster than if you did them in pure python:
     True
 
 
-**Logical operations:**
+**逻辑操作:**
 
 .. sourcecode:: pycon
 
@@ -130,7 +129,7 @@ These operations are of course much faster than if you did them in pure python:
     >>> np.logical_and(a, b)
     array([ True, False, False, False], dtype=bool)
 
-**Transcendental functions:**
+**超越函数:**
 
 .. sourcecode:: pycon
 
@@ -143,7 +142,7 @@ These operations are of course much faster than if you did them in pure python:
     array([  1.        ,   2.71828183,   7.3890561 ,  20.08553692,  54.59815003])
 
 
-**Shape mismatches**
+**形状不匹配**
 
 .. sourcecode:: pycon
 
@@ -153,13 +152,13 @@ These operations are of course much faster than if you did them in pure python:
       File "<stdin>", line 1, in <module>
     ValueError: operands could not be broadcast together with shapes (4) (2)
 
-*Broadcasting?* We'll return to that :ref:`later <broadcasting>`.
+*广播?* 我们稍后会讲到的啦 :ref:`later <broadcasting>`.
 
-**Transposition:**
+**转置:**
 
 .. sourcecode:: pycon
 
-    >>> a = np.triu(np.ones((3, 3)), 1)   # see help(np.triu)
+    >>> a = np.triu(np.ones((3, 3)), 1)   # 请看 help(np.triu)
     >>> a
     array([[ 0.,  1.,  1.],
            [ 0.,  0.,  1.],
@@ -170,29 +169,25 @@ These operations are of course much faster than if you did them in pure python:
            [ 1.,  1.,  0.]])
 
 
-.. warning:: **The transposition is a view**
+.. warning:: **转置是一个视图(view)**
 
-    As a results, the following code **is wrong** and will **not make a
-    matrix symmetric**::
+    因此, 下面的代码 **is wrong** 而且 **不会创建一个对称矩阵的**::
 
         >>> a += a.T
 
-    It will work for small arrays (because of buffering) but fail for
-    large one, in unpredictable ways.
+    上述代码在比较小的数组上是可以工作的 (因为有缓存)， 但是对大数组会失败，结果不可预测。
 
-.. note:: **Linear algebra**
+.. note:: **线性代数**
 
-    The sub-module :mod:`numpy.linalg` implements basic linear algebra, such as
-    solving linear systems, singular value decomposition, etc. However, it is
-    not guaranteed to be compiled using efficient routines, and thus we
-    recommend the use of :mod:`scipy.linalg`, as detailed in section
-    :ref:`scipy_linalg`
+    子模块 :mod:`numpy.linalg` 实现了基本线性代数, 比如求解线性系统，奇异值分解(SVD)，等等。
+    然而该子模块并不保证它们的实现程序是高效的，因此我梦推荐使用 :mod:`scipy.linalg`, 
+    这个模块在章节 :ref:`scipy_linalg` 中有介绍。
 
-.. topic:: Exercise other operations
+.. topic:: 练习一些其他的操作
    :class: green
 
-    * Look at the help for ``np.allclose``. When might this be useful?
-    * Look at the help for ``np.triu`` and ``np.tril``.
+    * 查看 ``np.allclose`` 的帮助文档. 这个函数啥时候有用武之地呢？
+    * 接着查看这两个函数 ``np.triu`` 和 ``np.tril`` 。
 
 
 基本约简
@@ -211,8 +206,9 @@ These operations are of course much faster than if you did them in pure python:
 
 .. image:: images/reductions.png
     :align: right
+    :target: http://www.studyai.com
 
-Sum by rows and by columns:
+按行求和与按列求和:
 
 .. sourcecode:: pycon
 
@@ -220,18 +216,18 @@ Sum by rows and by columns:
     >>> x
     array([[1, 1],
            [2, 2]])
-    >>> x.sum(axis=0)   # columns (first dimension)
+    >>> x.sum(axis=0)   # 列 (第一纬)
     array([3, 3])
     >>> x[:, 0].sum(), x[:, 1].sum()
     (3, 3)
-    >>> x.sum(axis=1)   # rows (second dimension)
+    >>> x.sum(axis=1)   # 行 (第二维)
     array([2, 4])
     >>> x[0, :].sum(), x[1, :].sum()
     (2, 4)
 
 .. tip::
 
-  Same idea in higher dimensions:
+  在更高维空间中的操作:
 
   .. sourcecode:: pycon
 
@@ -244,7 +240,7 @@ Sum by rows and by columns:
 其他约简操作
 ................
 
---- works the same way (and take ``axis=``)
+--- 工作方式是一样的 (都接受参数 ``axis=``)
 
 **Extrema:**
 
@@ -256,12 +252,12 @@ Sum by rows and by columns:
   >>> x.max()
   3
 
-  >>> x.argmin()  # index of minimum
+  >>> x.argmin()  # 最小值的索引
   0
-  >>> x.argmax()  # index of maximum
+  >>> x.argmax()  # 最大值的索引
   1
 
-**Logical operations:**
+**逻辑操作:**
 
 .. sourcecode:: pycon
 
@@ -272,7 +268,7 @@ Sum by rows and by columns:
 
 .. note::
 
-   Can be used for array comparisons:
+   可以用于数组比较:
 
    .. sourcecode:: pycon
 
@@ -288,7 +284,7 @@ Sum by rows and by columns:
       >>> ((a <= b) & (b <= c)).all()
       True
 
-**Statistics:**
+**统计:**
 
 .. sourcecode:: pycon
 
@@ -298,42 +294,41 @@ Sum by rows and by columns:
   1.75
   >>> np.median(x)
   1.5
-  >>> np.median(y, axis=-1) # last axis
+  >>> np.median(y, axis=-1) # 最后一个数轴
   array([ 2.,  5.])
 
-  >>> x.std()          # full population standard dev.
+  >>> x.std()          # 全部总体标准差.
   0.82915619758884995
 
 
 ... and many more (best to learn as you go).
 
-.. topic:: **Exercise: Reductions**
+.. topic:: **练习: 约减**
    :class: green
 
-    * Given there is a ``sum``, what other function might you expect to see?
-    * What is the difference between ``sum`` and ``cumsum``?
+    * 假定有这样一个函数 ``sum``, 你还希望有哪些函数呢?
+    * ``sum`` 和 ``cumsum`` 之间的区别是啥?
 
-.. topic:: Worked Example: data statistics
+.. topic:: 工作案例: 数据统计
    :class: green
 
-   Data in :download:`populations.txt <../../data/populations.txt>`
-   describes the populations of hares and lynxes (and carrots) in northern
-   Canada during 20 years.
+   在这儿下载数据 :download:`populations.txt <../../data/populations.txt>`
+   描述了20年来加拿大北部野兔和山猫(和胡萝卜)的数量。
 
-   You can view the data in an editor, or alternatively in IPython (both shell and notebook):
+   你可以在编辑器中查看下载的数据, 或者 在 IPython 中查看(在windows上不能用):
 
    .. sourcecode:: ipython
 
      In [1]: !cat data/populations.txt
 
-   First, load the data into a NumPy array:
+   首先，把数据加载到 NumPy 数组:
 
    .. sourcecode:: pycon
 
      >>> data = np.loadtxt('data/populations.txt')
-     >>> year, hares, lynxes, carrots = data.T  # trick: columns to variables
+     >>> year, hares, lynxes, carrots = data.T  # 技巧: columns to variables
 
-   Then plot it:
+   然后画出它们:
 
    .. sourcecode:: pycon
 
@@ -347,7 +342,7 @@ Sum by rows and by columns:
       :target: auto_examples/plot_populations.html
       :align: center
 
-   The mean populations over time:
+   随时间变化的种群平均数量:
 
    .. sourcecode:: pycon
 
@@ -355,21 +350,21 @@ Sum by rows and by columns:
      >>> populations.mean(axis=0)
      array([ 34080.95238095,  20166.66666667,  42400.        ])
 
-   The sample standard deviations:
+   随时间变化的样本标准差:
 
    .. sourcecode:: pycon
 
      >>> populations.std(axis=0)
      array([ 20897.90645809,  16254.59153691,   3322.50622558])
 
-   Which species has the highest population each year?:
+   每年种群的数量最大的是哪一个?:
 
    .. sourcecode:: pycon
 
      >>> np.argmax(populations, axis=1)
      array([2, 2, 0, 0, 1, 1, 2, 2, 2, 2, 2, 2, 0, 0, 0, 1, 2, 2, 2, 2, 2])
 
-.. topic:: Worked Example: diffusion using a random walk algorithm
+.. topic:: 工作案例: diffusion using a random walk algorithm
 
   .. image:: random_walk.png
      :align: center
