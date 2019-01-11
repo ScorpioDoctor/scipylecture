@@ -19,32 +19,32 @@
 转换
 ........
 
-"Bigger" type wins in mixed-type operations::
+在混合类型操作中，**更大的** 类型会胜出::
 
     >>> np.array([1, 2, 3]) + 1.5
     array([ 2.5,  3.5,  4.5])
 
-Assignment never changes the type! ::
+赋值操作不会改变原来的数据类型! ::
 
     >>> a = np.array([1, 2, 3])
     >>> a.dtype
     dtype('int64')
-    >>> a[0] = 1.9     # <-- float is truncated to integer
+    >>> a[0] = 1.9     # <-- float 被截断成 integer
     >>> a
     array([1, 2, 3])
 
-Forced casts::
+强制转换数据类型::
 
     >>> a = np.array([1.7, 1.2, 1.6])
-    >>> b = a.astype(int)  # <-- truncates to integer
+    >>> b = a.astype(int)  # <-- 截断成 integer
     >>> b
     array([1, 1, 1])
 
-Rounding::
+四舍五入::
 
     >>> a = np.array([1.2, 1.5, 1.6, 2.5, 3.5, 4.5])
     >>> b = np.around(a)
-    >>> b                    # still floating-point
+    >>> b                    # 任然是浮点型
     array([ 1.,  2.,  2.,  2.,  4.,  4.])
     >>> c = np.around(a).astype(int)
     >>> c
