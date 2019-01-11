@@ -534,16 +534,13 @@ Numpy的这些算术运算当然比用纯Python的相关操作快的多啦:
 
 .. tip::
 
-    Broadcasting seems a bit magical, but it is actually quite natural to
-    use it when we want to solve a problem whose output data is an array
-    with more dimensions than input data.
+    广播似乎有点神奇，但当我们想要解决输出数据是一个比输入数据维数更大的数组时，使用它实际上是很自然的。
 
-.. topic:: Worked Example: Broadcasting
+.. topic:: 工作案例: 广播
    :class: green
 
-   Let's construct an array of distances (in miles) between cities of
-   Route 66: Chicago, Springfield, Saint-Louis, Tulsa, Oklahoma City,
-   Amarillo, Santa Fe, Albuquerque, Flagstaff and Los Angeles.
+   让我们创建一个数组，它包含了66号公路沿线各城市之间的距离: 芝加哥, 斯普林菲尔德, 圣路易斯，图尔萨, 俄克拉荷马,
+   阿马里洛, 圣塔菲, 阿尔伯克基, 弗洛格斯塔佛 和 洛杉矶。
 
    .. sourcecode:: pycon
 
@@ -567,9 +564,7 @@ Numpy的这些算术运算当然比用纯Python的相关操作快的多啦:
       :align: center
       :scale: 60
 
-A lot of grid-based or network-based problems can also use
-broadcasting. For instance, if we want to compute the distance from
-the origin of points on a 10x10 grid, we can do
+许多基于网格或基于网络的问题也可以使用广播。例如，如果我们想计算10x10网格上点的起始点的距离，我们可以这样做。
 
 .. sourcecode:: pycon
 
@@ -582,7 +577,7 @@ the origin of points on a 10x10 grid, we can do
            [ 3.        ,  3.16227766,  3.60555128,  4.24264069,  5.        ],
            [ 4.        ,  4.12310563,  4.47213595,  5.        ,  5.65685425]])
 
-Or in color:
+或 用颜色画出来:
 
 .. sourcecode:: pycon
 
@@ -595,8 +590,7 @@ Or in color:
    :align: center
 
 
-**Remark** : the :func:`numpy.ogrid` function allows to directly create vectors x
-and y of the previous example, with two "significant dimensions":
+**注意** : 函数 :func:`numpy.ogrid` 可以直接创建上面的例子中的向量 x 和 y，并带有两个重要的维度。 
 
 .. sourcecode:: pycon
 
@@ -613,10 +607,8 @@ and y of the previous example, with two "significant dimensions":
 
 .. tip::
 
-  So, ``np.ogrid`` is very useful as soon as we have to handle
-  computations on a grid. On the other hand, ``np.mgrid`` directly
-  provides matrices full of indices for cases where we can't (or don't
-  want to) benefit from broadcasting:
+  因此, 只要当我们想要在一个网格上处理计算问题的时候， ``np.ogrid`` 是非常有用的。
+  另一方面, ``np.mgrid`` 直接提供了填充满索引的矩阵，用于那些我们不能或不想使用广播的情况。
 
   .. sourcecode:: pycon
 
@@ -645,8 +637,7 @@ and y of the previous example, with two "significant dimensions":
 
 .. seealso::
    
-   :ref:`broadcasting_advanced`: discussion of broadcasting in
-   the :ref:`advanced_numpy` chapter.
+   :ref:`broadcasting_advanced`:  关于广播的讨论  :ref:`advanced_numpy` 章节。
 
 
 数组形状的操作
@@ -667,12 +658,12 @@ and y of the previous example, with two "significant dimensions":
     >>> a.T.ravel()
     array([1, 4, 2, 5, 3, 6])
 
-Higher dimensions: last dimensions ravel out "first".
+更高的维度: 最后一维首先被展平(ravel out)
 
 改变形状
 .........
 
-The inverse operation to flattening:
+展平操作的逆操作:
 
 .. sourcecode:: pycon
 
@@ -684,18 +675,17 @@ The inverse operation to flattening:
     array([[1, 2, 3],
            [4, 5, 6]])
 
-Or,
+或者,
 
 .. sourcecode:: pycon
 
-    >>> a.reshape((2, -1))    # unspecified (-1) value is inferred
+    >>> a.reshape((2, -1))    # 未指定的值 (-1) 会被推断出来
     array([[1, 2, 3],
            [4, 5, 6]])
 
 .. warning::
 
-   ``ndarray.reshape`` **may** return a view (cf ``help(np.reshape)``)), 
-   or copy
+   ``ndarray.reshape`` **可能** 返回一个视图 (cf ``help(np.reshape)``)), 或者 是一个拷贝 
 
 .. tip::
 
@@ -706,7 +696,7 @@ Or,
      array([[99,  2,  3],
             [ 4,  5,  6]])
 
-   Beware: reshape may also return a copy!:
+   要小心: reshape 可能会返回一个 copy!:
 
    .. sourcecode:: pycon
 
@@ -718,13 +708,13 @@ Or,
             [ 0.,  0.],
             [ 0.,  0.]])
 
-   To understand this you need to learn more about the memory layout of a numpy array.
+   要想充分理解这一点，你需要学习numpy数组的内存布局(memory layout of a numpy array).
 
 添加一维
 ..................
 
-Indexing with the ``np.newaxis`` object allows us to add an axis to an array
-(you have seen this already above in the broadcasting section):
+使用 ``np.newaxis`` 对象索引允许我们添加一个新的数轴(axis)到一个数组
+(在上面的广播一小节你已经见过了):
 
 .. sourcecode:: pycon
 
@@ -742,7 +732,7 @@ Indexing with the ``np.newaxis`` object allows us to add an axis to an array
 
 
 
-Dimension shuffling
+维度重排
 ...................
 
 .. sourcecode:: pycon
@@ -758,7 +748,7 @@ Dimension shuffling
     >>> b[2, 1, 0]
     5
 
-Also creates a view:
+上述 transpose 只是创建了一个视图:
 
 .. sourcecode:: pycon
 
@@ -769,7 +759,7 @@ Also creates a view:
 重置Size
 ........
 
-Size of an array can be changed with ``ndarray.resize``:
+数组的size可以使用 ``ndarray.resize`` 进行修改:
 
 .. sourcecode:: pycon
 
@@ -778,7 +768,7 @@ Size of an array can be changed with ``ndarray.resize``:
     >>> a
     array([0, 1, 2, 3, 0, 0, 0, 0])
 
-However, it must not be referred to somewhere else:
+然而, 被resize的数组不能在其他地方被引用:
 
 .. sourcecode:: pycon
 
@@ -806,19 +796,18 @@ However, it must not be referred to somewhere else:
 .. EXE: shuffling dimensions when writing a general vectorized function
 .. CHA: the mathematical 'vec' operation
 
-.. topic:: **Exercise: Shape manipulations**
+.. topic:: **练习: 形状(Shape) 操作**
    :class: green
 
-   * Look at the docstring for ``reshape``, especially the notes section which
-     has some more information about copies and views.
-   * Use ``flatten`` as an alternative to ``ravel``. What is the difference?
+   * 查看 ``reshape`` 的文档, 尤其是那些需要注意的小节，包含了很多关于 copies 和 views 的信息。
+   * 使用 ``flatten`` 作为 ``ravel`` 的一个替换。 那么它们的区别是啥?
      (Hint: check which one returns a view and which a copy)
-   * Experiment with ``transpose`` for dimension shuffling.
+   * 用 ``transpose`` 做实验学习维度重排(Dimension shuffling).
 
 数据排序
 ------------
 
-Sorting along an axis:
+沿着某个数轴(axis)排序:
 
 .. sourcecode:: pycon
 
@@ -828,9 +817,9 @@ Sorting along an axis:
     array([[3, 4, 5],
            [1, 1, 2]])
 
-.. note:: Sorts each row separately!
+.. note:: 分别对每一行排序!
 
-In-place sort:
+原位(In-place)排序:
 
 .. sourcecode:: pycon
 
@@ -839,7 +828,7 @@ In-place sort:
     array([[3, 4, 5],
            [1, 1, 2]])
 
-Sorting with fancy indexing:
+使用花式索引(fancy indexing)进行排序:
 
 .. sourcecode:: pycon
 
@@ -850,7 +839,7 @@ Sorting with fancy indexing:
     >>> a[j]
     array([1, 2, 3, 4])
 
-Finding minima and maxima:
+查找最大最小值:
 
 .. sourcecode:: pycon
 
@@ -861,62 +850,52 @@ Finding minima and maxima:
     (0, 2)
 
 
-.. XXX: need a frame for summaries
-
-    * Arithmetic etc. are elementwise operations
-    * Basic linear algebra, ``.dot()``
-    * Reductions: ``sum(axis=1)``, ``std()``, ``all()``, ``any()``
-    * Broadcasting: ``a = np.arange(4); a[:,np.newaxis] + a[np.newaxis,:]``
-    * Shape manipulation: ``a.ravel()``, ``a.reshape(2, 2)``
-    * Fancy indexing: ``a[a > 3]``, ``a[[2, 3]]``
-    * Sorting data: ``.sort()``, ``np.sort``, ``np.argsort``, ``np.argmax``
-
-.. topic:: **Exercise: Sorting**
+.. topic:: **练习: 排序**
    :class: green
 
-    * Try both in-place and out-of-place sorting.
-    * Try creating arrays with different dtypes and sorting them.
-    * Use ``all`` or ``array_equal`` to check the results.
-    * Look at ``np.random.shuffle`` for a way to create sortable input quicker.
-    * Combine ``ravel``, ``sort`` and ``reshape``.
-    * Look at the ``axis`` keyword for ``sort`` and rewrite the previous
-      exercise.
+    * 尝试原位排序和非原位排序。
+    * 尝试创建不同类型的数组并对其排序。
+    * 使用 ``all`` 或 ``array_equal`` 来检查结果。
+    * 查看 ``np.random.shuffle`` 作为一种创建可排序输入的方法.
+    * 组合使用 ``ravel``, ``sort`` 和 ``reshape`` 。
+    * 查看 ``sort`` 函数 的 ``axis`` 关键字，并重做上面的排序练习。
+
+.. topic:: 简单总结
+
+    * 算术运算 etc. 是按元素进行操作的
+    * 基本线性代数, ``.dot()``
+    * 约减: ``sum(axis=1)``, ``std()``, ``all()``, ``any()``
+    * 广播: ``a = np.arange(4); a[:,np.newaxis] + a[np.newaxis,:]``
+    * Shape 操作: ``a.ravel()``, ``a.reshape(2, 2)``
+    * 花式索引: ``a[a > 3]``, ``a[[2, 3]]``
+    * 数据排序: ``.sort()``, ``np.sort``, ``np.argsort``, ``np.argmax``
+
 
 总结
 -------
 
-**What do you need to know to get started?**
+**你需要知道什么才能开始?**
 
-* Know how to create arrays : ``array``, ``arange``, ``ones``,
-  ``zeros``.
+* 知道如何创建数组 : ``array``, ``arange``, ``ones``,  ``zeros``.
 
-* Know the shape of the array with ``array.shape``, then use slicing
-  to obtain different views of the array: ``array[::2]``,
-  etc. Adjust the shape of the array using ``reshape`` or flatten it
-  with ``ravel``.
+* 知道使用 ``array.shape`` 获得数组的shape, 然后会用切片操作获得数组的不同视图: ``array[::2]``,
+  etc. 使用 ``reshape`` 调整数组的shape, 或 使用 ``ravel`` 把数组展平.
 
-* Obtain a subset of the elements of an array and/or modify their values
-  with masks
+* 使用掩模(masks)获得数组的一个子集，或着 对某个子集进行修改赋值
 
   .. sourcecode:: pycon
 
      >>> a[a < 0] = 0
 
-* Know miscellaneous operations on arrays, such as finding the mean or max
-  (``array.max()``, ``array.mean()``). No need to retain everything, but
-  have the reflex to search in the documentation (online docs,
-  ``help()``, ``lookfor()``)!!
+* 知道关于数组的一些杂七杂八的常用操作，如找最大值，平均值 (``array.max()``, ``array.mean()``)。 
+  不需要记住所有事情, 但是要学会如何查找搜索文档 (online docs, ``help()``, ``lookfor()``)!!
 
-* For advanced use: master the indexing with arrays of integers, as well as
-  broadcasting. Know more NumPy functions to handle various array
-  operations.
+* 对于高级使用: 掌握使用整数数组的索引，以及广播。掌握更多 NumPy 函数来处理各种各样的操作
 
-.. topic:: **Quick read**
+.. topic:: **快速阅读**
 
-   If you want to do a first quick pass through the Scipy lectures to
-   learn the ecosystem, you can directly skip to the next chapter:
-   :ref:`matplotlib`.
+   如果你想做第一次快速通过Scipy讲座来学习生态系统，你可以直接跳到下一章:
+   :ref:`matplotlib` 。
 
-   The remainder of this chapter is not necessary to follow the rest of
-   the intro part. But be sure to come back and finish this chapter, as
-   well as to do some more :ref:`exercices <numpy_exercises>`.
+   本章的其余部分没有必要跟随介绍部分的其余部分。但一定要回来完成这一章，
+   并做一些更多的练习 :ref:`exercices <numpy_exercises>`.
